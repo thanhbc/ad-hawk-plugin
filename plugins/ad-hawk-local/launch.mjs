@@ -2,12 +2,13 @@
  * Starts the ad-hawk-local MCP server. The server itself is a release
  * archive pinned by runtime.json (version, url, sha256) next to this file.
  * On first start the archive is downloaded, checked against the pinned
- * sha256, unpacked into ~/.ad-hawk/runtime/<version>/ and reused afterwards.
+ * sha256, unpacked into ~/.ad-hawk/runtime/<version>-<sha prefix>/ and
+ * reused afterwards.
  * stdout is the MCP channel, so everything this file prints goes to stderr.
  */
 import { execFileSync } from "node:child_process";
 import { createHash, randomBytes } from "node:crypto";
-import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -38,14 +39,44 @@ async function download(url, fetchImpl) {
   return Buffer.from(await response.arrayBuffer());
 }
 
+/** True if `dir` holds a complete install of exactly this pin. */
+function isInstalled(dir, pin) {
+  try {
+    return readFileSync(join(dir, DONE), "utf8").trim() === pin.sha256 && existsSync(join(dir, "server.mjs"));
+  } catch {
+    return false;
+  }
+}
+
+/** The folder of a complete install of `pin` under `root`, or null. */
+function findInstalled(root, key, pin) {
+  const primary = join(root, key);
+  if (isInstalled(primary, pin)) return primary;
+  let names;
+  try {
+    names = readdirSync(root);
+  } catch {
+    return null;
+  }
+  for (const name of names.sort()) {
+    if (name.startsWith(`${key}.`) && isInstalled(join(root, name), pin)) return join(root, name);
+  }
+  return null;
+}
+
 /**
  * Make sure the pinned runtime is unpacked under `root` and return its folder.
- * The archive is checked before anything is written to disk, and the folder
- * appears under its final name only once it is complete.
+ * The folder is named after the pinned version and checksum, and is reused
+ * only when its marker holds that checksum and its server is there. The
+ * archive is checked before anything is written to disk, a folder appears
+ * under its name only once it is complete, and existing folders are never
+ * moved or deleted: if the name is taken by a damaged folder, the new install
+ * goes beside it under a unique name.
  */
 export async function ensureRuntime(pin, { root = join(homedir(), ".ad-hawk", "runtime"), fetchImpl = fetch } = {}) {
-  const target = join(root, pin.version);
-  if (existsSync(join(target, DONE))) return target;
+  const key = `${pin.version}-${pin.sha256.slice(0, 16)}`;
+  const found = findInstalled(root, key, pin);
+  if (found) return found;
 
   log(`installing the local server ${pin.version} (first start only)...`);
   const archive = await download(pin.url, fetchImpl);
@@ -64,21 +95,23 @@ export async function ensureRuntime(pin, { root = join(homedir(), ".ad-hawk", "r
     execFileSync("tar", ["-xzf", file, "-C", unpacked], { stdio: ["ignore", "ignore", "pipe"] });
     if (!existsSync(join(unpacked, "server.mjs"))) throw new Error("The server archive has no server.mjs.");
     writeFileSync(join(unpacked, DONE), `${pin.sha256}\n`);
+    let target = join(root, key);
     try {
       renameSync(unpacked, target);
     } catch (error) {
-      // Another start finished the same install first: use that one.
-      if (existsSync(join(target, DONE))) return target;
       if (!existsSync(target)) throw error;
-      // An incomplete folder left by hand: replace it.
-      rmSync(target, { recursive: true, force: true });
+      // Another start finished the same install first: use that one.
+      if (isInstalled(target, pin)) return target;
+      const damaged = target;
+      target = join(root, `${key}.${randomBytes(6).toString("hex")}`);
       renameSync(unpacked, target);
+      log(`${damaged} is incomplete and was left as it is; it can be removed.`);
     }
+    log(`installed the local server ${pin.version}.`);
+    return target;
   } finally {
     rmSync(work, { recursive: true, force: true });
   }
-  log(`installed the local server ${pin.version}.`);
-  return target;
 }
 
 async function main() {
