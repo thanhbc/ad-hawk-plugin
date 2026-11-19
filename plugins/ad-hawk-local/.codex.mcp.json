@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "ad-hawk-local": {
+      "command": "node",
+      "args": [
+        "./launch.mjs",
+        "--client",
+        "codex"
+      ],
+      "cwd": ".",
+      "tool_timeout_sec": 900
+    }
+  }
+}

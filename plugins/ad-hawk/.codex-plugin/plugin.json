@@ -1,0 +1,20 @@
+{
+  "name": "ad-hawk",
+  "description": "Read-only access to ad-hawk audits, the approval Inbox and stored ad performance from Codex.",
+  "version": "0.3.0",
+  "author": {
+    "name": "thanhbc"
+  },
+  "repository": "https://github.com/thanhbc/ad-hawk",
+  "license": "UNLICENSED",
+  "keywords": [
+    "ads",
+    "audit",
+    "meta-ads",
+    "google-ads",
+    "mcp",
+    "read-only"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.codex.mcp.json"
+}

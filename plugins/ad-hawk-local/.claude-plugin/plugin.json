@@ -1,0 +1,20 @@
+{
+  "name": "ad-hawk-local",
+  "description": "Sign in to Meta or Google Ads from Claude Code, sync your ad accounts to this computer, and ask about performance and audit findings. Read-only on the ad platforms.",
+  "version": "0.1.0",
+  "author": {
+    "name": "thanhbc"
+  },
+  "repository": "https://github.com/thanhbc/ad-hawk-plugin",
+  "license": "UNLICENSED",
+  "keywords": [
+    "ads",
+    "audit",
+    "meta-ads",
+    "google-ads",
+    "mcp",
+    "read-only",
+    "local-first"
+  ],
+  "mcpServers": "./.mcp.json"
+}

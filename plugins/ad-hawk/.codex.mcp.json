@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "ad-hawk": {
+      "type": "http",
+      "url": "https://ad-hawk.ad-hawk.workers.dev/api/mcp",
+      "bearer_token_env_var": "AD_HAWK_MCP_TOKEN"
+    }
+  }
+}

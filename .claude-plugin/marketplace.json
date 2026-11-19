@@ -1,0 +1,22 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "ad-hawk",
+  "description": "Claude Code plugin for ad-hawk, the read-only ad audit assistant.",
+  "owner": {
+    "name": "thanhbc"
+  },
+  "plugins": [
+    {
+      "name": "ad-hawk",
+      "source": "./plugins/ad-hawk",
+      "description": "Read-only access to ad-hawk audits, the approval Inbox and stored ad performance from Claude Code.",
+      "category": "productivity"
+    },
+    {
+      "name": "ad-hawk-local",
+      "source": "./plugins/ad-hawk-local",
+      "description": "Local-first ad-hawk: sign in to Meta or Google Ads, cache your accounts on this computer and chat about performance. Read-only on the ad platforms.",
+      "category": "productivity"
+    }
+  ]
+}

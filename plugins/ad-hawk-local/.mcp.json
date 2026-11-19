@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "ad-hawk-local": {
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/launch.mjs",
+        "--client",
+        "claude"
+      ]
+    }
+  }
+}
