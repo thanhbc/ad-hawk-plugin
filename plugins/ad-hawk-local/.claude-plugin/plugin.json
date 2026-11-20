@@ -1,7 +1,7 @@
 {
   "name": "ad-hawk-local",
   "description": "Sign in to Meta or Google Ads from Claude Code, sync your ad accounts to this computer, and ask about performance and audit findings. Read-only on the ad platforms.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "thanhbc"
   },
