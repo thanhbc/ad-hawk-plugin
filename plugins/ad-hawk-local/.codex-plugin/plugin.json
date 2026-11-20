@@ -1,7 +1,7 @@
 {
   "name": "ad-hawk-local",
-  "description": "Sign in to Meta or Google Ads from Codex, sync your ad accounts to this computer, and ask about performance and audit findings. Read-only on the ad platforms.",
-  "version": "0.1.2",
+  "description": "Audit your Meta and Google Ads from Codex: find wasted spend, broken tracking and budget problems, ranked by money at risk, with the evidence. Data stays on this computer; read-only on the ad platforms.",
+  "version": "0.1.3",
   "author": {
     "name": "thanhbc"
   },
@@ -16,5 +16,6 @@
     "read-only",
     "local-first"
   ],
+  "skills": "./skills/",
   "mcpServers": "./.codex.mcp.json"
 }
