@@ -7,12 +7,10 @@ allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plug
 
 Audit the user's ad accounts, and lead with money at risk. Get data only from the ad-hawk MCP tools; a chart or visual
 tool in this app may only display that data. The scope is what the user
-asked for (nothing means every connected account; `meta` or `google` means that platform; anything else is an account name).
+asked for (nothing means every connected account). An argument is an account name or a platform; step 1 says which.
 
-1. Call `list_accounts` (with `platform` when the scope is a platform). If no accounts are connected, offer `connect_account`
-   and stop. Match an account name case-insensitively. If it matches nothing, list the account names and stop. If it
-   matches more than one account (names are not unique across platforms), list the matches with their platform and id
-   and ask which one; never pick one yourself.
+1. Call `list_accounts` first, without `platform`. If no accounts are connected, offer `connect_account` and stop.
+   Match the argument against the account names from `list_accounts`, in this order: (a) a quoted argument is always an account name; (b) an exact case-insensitive match on a full name uses that account; (c) otherwise an unquoted `meta` or `google` keeps its meaning as the platform (filter the accounts to it); (d) otherwise match it as a case-insensitive substring of the names: exactly one match means use that account; several matches mean list them with platform and id and ask which one, never pick one yourself; no match means say so and list the account names, then stop.
 2. Call `get_audit_status` for the scope (`accountId` for one account, `platform` for a platform). Note `currentRuleVersion`
    and any run whose `ruleVersion` differs from it. If the data is stale, offer `sync_now`.
 3. Call `list_findings` once per account in scope, with its `accountId` and `orderBy: "money_at_risk"`
@@ -30,7 +28,7 @@ asked for (nothing means every connected account; `meta` or `google` means that 
    - Then "Best-practice checks" from the section below: the learning-volume check, then the "check in Ads Manager /
      Google Ads" items that a failed rule triggered. Skip this part when nothing applies.
    - Then run time, rule version, and counts of pass, fail, unknown and not applicable. Say why each unknown rule
-     could not be judged.
+     could not be judged. If a skip note or unknown reason says a threshold is missing for the account's currency (R1, R13, R7 and R10 have built-in minimums for USD only), name the settings that control them: `AUDIT_TARGET_CPA` or `AUDIT_R1_MIN_SPEND` (R1), `AUDIT_R7_MIN_SPEND` (R7), `AUDIT_R10_MIN_SPEND` (R10) and `AUDIT_R13_MIN_SPEND` (R13), in the account's currency. Show a value only as a clearly labelled example, for example "example only: AUDIT_R1_MIN_SPEND=50", and never apply it or assume a value. Say how to set them: add them to the "env" block of `~/.claude/settings.json` (Claude Code passes it to the plugin's server), then restart Claude Code, which closes every open session. `connect_account` may also return a `thresholdsNote` about this.
    - End with the three changes most worth making in Ads Manager or Google Ads, each tied to a finding. Use a
      best-practice check only when fewer than three failed findings exist, say it is one, and phrase it as what to
      check, for example "Check X in Ads Manager".

@@ -1,9 +1,9 @@
 <div class="ah-root">
 <style>
-.ah-root{--bg:#f6f6f3;--surface:#fff;--sunken:#f1f1ec;--border:#dcdcd5;--border-strong:#b9b9b0;--text:#1b1b18;--soft:#3a3a35;--muted:#55554e;--accent:#1f4fbf;--accent-soft:#eef2fb;--fail:#c8504a;--fail-text:#8f2323;--fail-soft:#fbeaea;--fail-border:#e3b6b6;--pass:#3e8e5e;--pass-text:#1e5a33;--pass-soft:#e8f4ec;--warn-text:#7a4300;--warn-soft:#fff6e8;--warn-border:#e9cf9f;--chip:#edede8;--chip-text:#3d3d38;--info-text:#1c3770;--hover:#f7f7f2;--rule-bg:#fafaf7;--unknown:#e0b25c;
+.ah-root{--bg:#f6f6f3;--surface:#fff;--sunken:#f1f1ec;--border:#dcdcd5;--border-strong:#b9b9b0;--text:#1b1b18;--soft:#3a3a35;--muted:#55554e;--accent:#1f4fbf;--accent-soft:#eef2fb;--fail:#c8504a;--fail-text:#8f2323;--fail-soft:#fbeaea;--fail-border:#e3b6b6;--pass:#3e8e5e;--pass-text:#1e5a33;--pass-soft:#e8f4ec;--warn-text:#7a4300;--warn-soft:#fff6e8;--warn-border:#e9cf9f;--chip:#edede8;--chip-text:#3d3d38;--info-text:#1c3770;--hover:#f7f7f2;--rule-bg:#fafaf7;--unknown:#e0b25c;--chart:#1f4fbf;--chart-axis:#55554e;
 color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:16px;font-variant-numeric:tabular-nums}
-@media (prefers-color-scheme:dark){:root:not([data-mode="light"]) .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;color-scheme:dark}}
-:root[data-mode="dark"] .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-mode="light"]) .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;--chart:#8fb0ff;--chart-axis:#a3a39b;color-scheme:dark}}
+:root[data-mode="dark"] .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;--chart:#8fb0ff;--chart-axis:#a3a39b;color-scheme:dark}
 .ah-root *{box-sizing:border-box;margin:0;padding:0}
 .ah-root :where(h1,h2,h3,h4,p,ol,ul,li,span,strong,b,th,td,div,section,header){color:inherit}
 .ah-root .ah-h1,.ah-root .ah-h2,.ah-root .ah-kpi,.ah-root .ah-money,.ah-root .ah-item-title,.ah-root .ah-item-body,.ah-root .ah-table td,.ah-root .ah-ol,.ah-root .ah-card,.ah-root .ah-tile{color:var(--text)}
@@ -52,6 +52,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-item-body{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:14px}
 .ah-item-title{font-weight:600;overflow-wrap:anywhere}
 .ah-money{font-weight:600;white-space:nowrap}
+.ah-chart{width:100%;height:auto;display:block;margin:8px 0}.ah-chart rect{fill:var(--chart)}.ah-chart line{stroke:var(--chart-axis);stroke-width:1}.ah-chart text{fill:var(--chart-axis);font-size:11px}
 .ah-detail{padding:4px 4px 16px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--soft)}
 .ah-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
 .ah-fact{background:var(--sunken);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;font-size:13px}
@@ -109,7 +110,9 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
   function str(v, max) { if (v === null || v === undefined) return ""; var s = String(v).replace(/[\r\n\t]+/g, " "); return s.length > max ? s.slice(0, max - 1) + "\u2026" : s; }
   function num(v) { return typeof v === "number" && isFinite(v) ? v : null; }
   function fmt(v) { v = num(v); if (v === null) return "\u2013"; return v.toLocaleString(undefined, { maximumFractionDigits: Math.abs(v) < 1 && v !== 0 ? 4 : 2 }); }
-  function money(v, cur) { v = num(v); return v === null ? "no estimate" : v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " " + cur; }
+  function minorDigits(cur) { try { return new Intl.NumberFormat("en", { style: "currency", currency: cur }).resolvedOptions().maximumFractionDigits; } catch (e) { return 2; } }
+  function roundAway(x, d) { var s = String(Math.abs(x)); if (s.indexOf("e") >= 0) return Math.abs(x); return Number(Math.round(Number(s + "e" + d)) + "e-" + d); }
+  function money(v, cur) { v = num(v); if (v === null) return "no estimate"; var d = minorDigits(cur), r = roundAway(v, d); return (v < 0 && r !== 0 ? "-" : "") + r.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d }) + " " + cur; }
   function when(iso) { var d = new Date(String(iso || "")); return isNaN(d) ? "never" : d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }); }
   function ago(iso) { var d = new Date(String(iso || "")); if (isNaN(d)) return ""; var h = Math.round((new Date() - d) / 36e5); return h < 1 ? "under an hour ago" : h < 48 ? h + " h ago" : Math.round(h / 24) + " days ago"; }
   function sev(s) { var k = SEV[s] ? s : "low"; return add(el("span", "ah-sev ah-sev-" + k), icon(k), el("span", "", SEV_WORD[k])); }
@@ -267,6 +270,24 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
     return v;
   }
 
+  function evidenceChart(f, rows, cur) {
+    var ctr = f.ruleId === "R15", ns = "http://www.w3.org/2000/svg", W = 620, H = 150, L = 8, B = 22, T = 18, vals = [];
+    rows.forEach(function (r) { r = r || {}; vals.push(ctr ? (num(r.impressions) > 0 && num(r.clicks) !== null ? r.clicks / r.impressions : null) : num(r.spend)); });
+    var max = Math.max.apply(null, vals.filter(function (v) { return v !== null; }).concat([0]));
+    if (!(max > 0)) return null;
+    var label = ctr ? "Daily CTR (clicks / impressions), peak " + (max * 100).toFixed(2) + "%" : "Daily spend in " + cur + ", peak " + money(max, cur);
+    var svg = document.createElementNS(ns, "svg"), n = rows.length, step = (W - L * 2) / n, ph = H - B - T, first = str(rows[0] && rows[0].date, 10), last = str(rows[n - 1] && rows[n - 1].date, 10);
+    function mk(tag, attrs) { var e = document.createElementNS(ns, tag); Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); }); svg.appendChild(e); return e; }
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("class", "ah-chart"); svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", label + ", " + n + " days, " + first + " to " + last + (vals.indexOf(null) >= 0 ? ", days without impressions are gaps" : ""));
+    mk("text", { x: L, y: 12 }).textContent = label;
+    mk("line", { x1: L, y1: T + ph, x2: W - L, y2: T + ph });
+    vals.forEach(function (v, i) { if (v === null) return; var h = Math.max(1, v / max * ph); mk("rect", { x: L + i * step + step * 0.15, y: T + ph - h, width: Math.max(1, step * 0.7), height: h }); });
+    mk("text", { x: L, y: H - 6 }).textContent = first;
+    mk("text", { x: W - L, y: H - 6, "text-anchor": "end" }).textContent = last;
+    return svg;
+  }
+
   function findingItem(f, a, rows) {
     var li = el("li", "ah-item"), head = el("button", "ah-item-head", null); head.type = "button";
     var body = add(el("span", "ah-item-body"), el("span", "ah-item-title", (f.ruleId ? f.ruleId + " \u00b7 " : "") + (f.rule || "Rule")), el("span", "ah-meta", [f.object || "(no name)", f.level].filter(Boolean).join(" \u00b7 ")));
@@ -282,7 +303,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
       ["Date", "Spend", "Impressions", "Clicks", "Conversions"].forEach(function (h) { hr.appendChild(el("th", "", h)); });
       add(t, add(el("thead", ""), hr)); var tb = el("tbody", "");
       f.evidence.forEach(function (r) { r = r || {}; add(tb, add(el("tr", ""), el("td", "", str(r.date, 10)), el("td", "", fmt(r.spend)), el("td", "", fmt(r.impressions)), el("td", "", fmt(r.clicks)), el("td", "", fmt(r.conversions)))); });
-      t.appendChild(tb); add(d, el("strong", "", "Evidence (daily rows)"), add(el("div", "ah-scroll"), t));
+      t.appendChild(tb); add(d, el("strong", "", "Evidence (daily rows)"), evidenceChart(f, f.evidence, a.currency), add(el("details", ""), el("summary", "", "Show daily rows"), add(el("div", "ah-scroll"), t)));
     } else d.appendChild(el("p", "ah-meta", f.evidence ? "This rule stores no daily evidence rows." : "Evidence not loaded here. Ask for this finding's details."));
     if (typeof window.sendPrompt === "function" && f.ruleId) {
       var ask = el("button", "ah-link-btn", "Ask Claude to explain this finding"); ask.type = "button";
