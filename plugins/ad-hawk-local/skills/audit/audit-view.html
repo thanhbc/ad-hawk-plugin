@@ -1,8 +1,12 @@
 <div class="ah-root">
 <style>
-.ah-root{--bg:#f6f6f3;--surface:#fff;--sunken:#f1f1ec;--border:#dcdcd5;--border-strong:#b9b9b0;--text:#1b1b18;--soft:#3a3a35;--muted:#55554e;--accent:#1f4fbf;--accent-soft:#eef2fb;--fail:#c8504a;--fail-text:#8f2323;--fail-soft:#fbeaea;--fail-border:#e3b6b6;--pass:#3e8e5e;--pass-text:#1e5a33;--pass-soft:#e8f4ec;--warn-text:#7a4300;--warn-soft:#fff6e8;--warn-border:#e9cf9f;--chip:#edede8;--chip-text:#3d3d38;
+.ah-root{--bg:#f6f6f3;--surface:#fff;--sunken:#f1f1ec;--border:#dcdcd5;--border-strong:#b9b9b0;--text:#1b1b18;--soft:#3a3a35;--muted:#55554e;--accent:#1f4fbf;--accent-soft:#eef2fb;--fail:#c8504a;--fail-text:#8f2323;--fail-soft:#fbeaea;--fail-border:#e3b6b6;--pass:#3e8e5e;--pass-text:#1e5a33;--pass-soft:#e8f4ec;--warn-text:#7a4300;--warn-soft:#fff6e8;--warn-border:#e9cf9f;--chip:#edede8;--chip-text:#3d3d38;--info-text:#1c3770;--hover:#f7f7f2;--rule-bg:#fafaf7;--unknown:#e0b25c;
 color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:16px;font-variant-numeric:tabular-nums}
+@media (prefers-color-scheme:dark){:root:not([data-mode="light"]) .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;color-scheme:dark}}
+:root[data-mode="dark"] .ah-root{--bg:#1c1c1a;--surface:#262624;--sunken:#30302d;--border:#3d3d39;--border-strong:#5a5a54;--text:#ecece7;--soft:#d0d0c9;--muted:#a3a39b;--accent:#8fb0ff;--accent-soft:#22304f;--fail:#e0726b;--fail-text:#f2a9a3;--fail-soft:#3d2523;--fail-border:#6b3a37;--pass:#5fb27f;--pass-text:#9fd8b2;--pass-soft:#1f3527;--warn-text:#f0c27a;--warn-soft:#3a2e1a;--warn-border:#6b5428;--chip:#33332f;--chip-text:#d6d6cf;--info-text:#c3d3ff;--hover:#2d2d2a;--rule-bg:#2a2a27;--unknown:#e0b25c;color-scheme:dark}
 .ah-root *{box-sizing:border-box;margin:0;padding:0}
+.ah-root :where(h1,h2,h3,h4,p,ol,ul,li,span,strong,b,th,td,div,section,header){color:inherit}
+.ah-root .ah-h1,.ah-root .ah-h2,.ah-root .ah-kpi,.ah-root .ah-money,.ah-root .ah-item-title,.ah-root .ah-item-body,.ah-root .ah-table td,.ah-root .ah-ol,.ah-root .ah-card,.ah-root .ah-tile{color:var(--text)}
 .ah-root button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
 .ah-root button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .ah-root a{color:var(--accent);text-decoration:none}
@@ -28,7 +32,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-chip-fail{background:var(--fail-soft);color:var(--fail-text)}
 .ah-ico{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .ah-notice{padding:10px 12px;border-radius:8px;font-size:14px;background:var(--warn-soft);color:var(--warn-text)}
-.ah-notice-info{background:var(--accent-soft);color:#1c3770}
+.ah-notice-info{background:var(--accent-soft);color:var(--info-text)}
 .ah-seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:8px;overflow:hidden;background:var(--surface)}
 .ah-seg button{min-height:34px;padding:0 12px;font-size:13px}
 .ah-seg button+button{border-left:1px solid var(--border-strong)}
@@ -44,7 +48,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-item{border-top:1px solid var(--border)}
 .ah-item:first-child{border-top:0}
 .ah-item-head{width:100%;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:12px 4px}
-.ah-item-head:hover{background:#f7f7f2}
+.ah-item-head:hover{background:var(--hover)}
 .ah-item-body{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:14px}
 .ah-item-title{font-weight:600;overflow-wrap:anywhere}
 .ah-money{font-weight:600;white-space:nowrap}
@@ -61,8 +65,8 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
 .ah-sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .ah-rules{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
-.ah-rule{width:100%;height:100%;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-top:4px solid var(--border-strong)!important;background:#fafaf7!important;border-radius:4px 4px 8px 8px;font-size:13px}
-.ah-rule-fail{border-top-color:var(--fail)!important}.ah-rule-pass{border-top-color:var(--pass)!important}.ah-rule-unknown{border-top-color:#e0b25c!important}
+.ah-rule{width:100%;height:100%;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-top:4px solid var(--border-strong)!important;background:var(--rule-bg)!important;border-radius:4px 4px 8px 8px;font-size:13px}
+.ah-rule-fail{border-top-color:var(--fail)!important}.ah-rule-pass{border-top-color:var(--pass)!important}.ah-rule-unknown{border-top-color:var(--unknown)!important}
 .ah-rule-state{font-weight:600;color:var(--chip-text)}
 .ah-rule-fail .ah-rule-state{color:var(--fail-text)}.ah-rule-pass .ah-rule-state{color:var(--pass-text)}
 .ah-reasons{grid-column:1/-1;background:var(--sunken);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--soft);display:flex;flex-direction:column;gap:4px}
@@ -80,7 +84,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
   var SEV = { high: 3, medium: 2, low: 1 };
   var SEV_WORD = { high: "High", medium: "Medium", low: "Low" };
   var STATUS = { pass: "Pass", fail: "Fail", unknown: "Unknown", not_applicable: "Not applicable" };
-  var STATUS_COLOR = { pass: "#3e8e5e", fail: "#c8504a", unknown: "#e0b25c", not_applicable: "#b9b9b0" };
+  var STATUS_COLOR = { pass: "var(--pass)", fail: "var(--fail)", unknown: "var(--unknown)", not_applicable: "var(--border-strong)" };
   var LEVEL = { account: "Account", campaign: "Campaign", ad_set: "Ad set", ad: "Ad" };
   var ICON = {
     high: ["M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86z", "M12 8v4", "M12 16h.01"],
