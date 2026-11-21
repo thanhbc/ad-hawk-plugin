@@ -1,0 +1,303 @@
+<div class="ah-root">
+<style>
+.ah-root{--bg:#f6f6f3;--surface:#fff;--sunken:#f1f1ec;--border:#dcdcd5;--border-strong:#b9b9b0;--text:#1b1b18;--soft:#3a3a35;--muted:#55554e;--accent:#1f4fbf;--accent-soft:#eef2fb;--fail:#c8504a;--fail-text:#8f2323;--fail-soft:#fbeaea;--fail-border:#e3b6b6;--pass:#3e8e5e;--pass-text:#1e5a33;--pass-soft:#e8f4ec;--warn-text:#7a4300;--warn-soft:#fff6e8;--warn-border:#e9cf9f;--chip:#edede8;--chip-text:#3d3d38;
+color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px;border-radius:12px;display:flex;flex-direction:column;gap:16px;font-variant-numeric:tabular-nums}
+.ah-root *{box-sizing:border-box;margin:0;padding:0}
+.ah-root button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+.ah-root button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ah-root a{color:var(--accent);text-decoration:none}
+.ah-h1{font:600 24px/1.2 "Space Grotesk",Inter,system-ui,sans-serif}
+.ah-h2{font-size:18px;font-weight:600;line-height:1.3}
+.ah-eyebrow{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.ah-meta{font-size:13px;color:var(--muted)}
+.ah-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.ah-tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--border)}
+.ah-tab{min-height:40px;padding:0 14px;border-bottom:2px solid transparent!important;font-size:14px;font-weight:500;color:var(--muted)!important}
+.ah-tab[aria-selected="true"]{border-bottom-color:var(--accent)!important;color:var(--accent)!important;font-weight:600}
+.ah-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.ah-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.ah-tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.ah-tile-label{font-size:13px;color:var(--muted)}
+.ah-kpi{font:600 24px/1.2 "Space Grotesk",Inter,system-ui,sans-serif}
+.ah-chip,.ah-sev{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-weight:600}
+.ah-chip{padding:3px 10px;border-radius:999px;background:var(--chip);color:var(--chip-text);font-size:12px}
+.ah-sev{padding:2px 8px;border-radius:6px;border:1px solid var(--border);font-size:12px;background:var(--chip);color:var(--chip-text)}
+.ah-sev-high{background:var(--fail-soft);color:var(--fail-text);border-color:var(--fail-border)}
+.ah-sev-medium{background:var(--warn-soft);color:var(--warn-text);border-color:var(--warn-border)}
+.ah-chip-pass{background:var(--pass-soft);color:var(--pass-text)}
+.ah-chip-fail{background:var(--fail-soft);color:var(--fail-text)}
+.ah-ico{width:13px;height:13px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ah-notice{padding:10px 12px;border-radius:8px;font-size:14px;background:var(--warn-soft);color:var(--warn-text)}
+.ah-notice-info{background:var(--accent-soft);color:#1c3770}
+.ah-seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:8px;overflow:hidden;background:var(--surface)}
+.ah-seg button{min-height:34px;padding:0 12px;font-size:13px}
+.ah-seg button+button{border-left:1px solid var(--border-strong)}
+.ah-seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.ah-bars{display:flex;flex-direction:column;gap:6px}
+.ah-bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:10px;align-items:center;font-size:13px;width:100%;padding:2px 4px;border-radius:6px}
+.ah-bar:hover{background:var(--sunken)}
+.ah-bar-label{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--soft)}
+.ah-bar-track{height:12px;background:var(--sunken);border-radius:3px;overflow:hidden}
+.ah-bar-fill{height:100%;background:var(--fail);border-radius:3px}
+.ah-link-btn{color:var(--accent)!important;font-size:13px;font-weight:600}
+.ah-list{list-style:none;display:flex;flex-direction:column}
+.ah-item{border-top:1px solid var(--border)}
+.ah-item:first-child{border-top:0}
+.ah-item-head{width:100%;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:12px 4px}
+.ah-item-head:hover{background:#f7f7f2}
+.ah-item-body{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:14px}
+.ah-item-title{font-weight:600;overflow-wrap:anywhere}
+.ah-money{font-weight:600;white-space:nowrap}
+.ah-detail{padding:4px 4px 16px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--soft)}
+.ah-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.ah-fact{background:var(--sunken);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;font-size:13px}
+.ah-fact b{font-size:15px;color:var(--text)}
+.ah-scroll{overflow-x:auto}
+.ah-table{width:100%;border-collapse:collapse;font-size:13px}
+.ah-table th,.ah-table td{padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.ah-table th:first-child,.ah-table td:first-child{text-align:left;white-space:normal}
+.ah-table th{font-size:12px;font-weight:600;color:var(--muted);background:var(--sunken)}
+.ah-stack{display:flex;height:14px;border-radius:4px;overflow:hidden;background:var(--sunken)}
+.ah-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.ah-sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.ah-rules{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.ah-rule{width:100%;height:100%;display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-top:4px solid var(--border-strong)!important;background:#fafaf7!important;border-radius:4px 4px 8px 8px;font-size:13px}
+.ah-rule-fail{border-top-color:var(--fail)!important}.ah-rule-pass{border-top-color:var(--pass)!important}.ah-rule-unknown{border-top-color:#e0b25c!important}
+.ah-rule-state{font-weight:600;color:var(--chip-text)}
+.ah-rule-fail .ah-rule-state{color:var(--fail-text)}.ah-rule-pass .ah-rule-state{color:var(--pass-text)}
+.ah-reasons{grid-column:1/-1;background:var(--sunken);border-radius:8px;padding:10px 14px;font-size:13px;color:var(--soft);display:flex;flex-direction:column;gap:4px}
+.ah-ol{padding-left:20px!important;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.ah-foot{font-size:12px;color:var(--muted)}
+@media (max-width:600px){.ah-root{padding:12px}.ah-tiles{grid-template-columns:1fr 1fr}.ah-card{padding:14px}}
+@media (prefers-reduced-motion:reduce){.ah-root *{transition:none!important}}
+</style>
+<script type="application/json" class="ah-data">AUDIT_DATA_JSON</script>
+<div class="ah-app" aria-live="polite"></div>
+<script>
+(function () {
+  var LINK = /^https:\/\/(support\.google\.com\/google-ads\/|en-gb\.facebook\.com\/business\/help\/|www\.facebook\.com\/business\/help\/|developers\.facebook\.com\/documentation\/)/;
+  var RULE = /^R\d{1,2}$/;
+  var SEV = { high: 3, medium: 2, low: 1 };
+  var SEV_WORD = { high: "High", medium: "Medium", low: "Low" };
+  var STATUS = { pass: "Pass", fail: "Fail", unknown: "Unknown", not_applicable: "Not applicable" };
+  var STATUS_COLOR = { pass: "#3e8e5e", fail: "#c8504a", unknown: "#e0b25c", not_applicable: "#b9b9b0" };
+  var LEVEL = { account: "Account", campaign: "Campaign", ad_set: "Ad set", ad: "Ad" };
+  var ICON = {
+    high: ["M7.86 2h8.28L22 7.86v8.28L16.14 22H7.86L2 16.14V7.86z", "M12 8v4", "M12 16h.01"],
+    medium: ["m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3", "M12 9v4", "M12 17h.01"],
+    low: ["M2 12a10 10 0 1 0 20 0a10 10 0 1 0-20 0", "M12 8v4", "M12 16h.01"],
+    pass: ["M18 6 7 17l-5-5", "m22 10-7.5 7.5L13 16"]
+  };
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined && text !== null) n.textContent = String(text);
+    return n;
+  }
+  function add(parent) { for (var i = 1; i < arguments.length; i++) if (arguments[i]) parent.appendChild(arguments[i]); return parent; }
+  function icon(kind) {
+    var ns = "http://www.w3.org/2000/svg", s = document.createElementNS(ns, "svg");
+    s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("class", "ah-ico"); s.setAttribute("aria-hidden", "true");
+    (ICON[kind] || ICON.low).forEach(function (d) { var p = document.createElementNS(ns, "path"); p.setAttribute("d", d); s.appendChild(p); });
+    return s;
+  }
+  function str(v, max) { if (v === null || v === undefined) return ""; var s = String(v).replace(/[\r\n\t]+/g, " "); return s.length > max ? s.slice(0, max - 1) + "\u2026" : s; }
+  function num(v) { return typeof v === "number" && isFinite(v) ? v : null; }
+  function fmt(v) { v = num(v); if (v === null) return "\u2013"; return v.toLocaleString(undefined, { maximumFractionDigits: Math.abs(v) < 1 && v !== 0 ? 4 : 2 }); }
+  function money(v, cur) { v = num(v); return v === null ? "no estimate" : v.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " " + cur; }
+  function when(iso) { var d = new Date(String(iso || "")); return isNaN(d) ? "never" : d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }); }
+  function ago(iso) { var d = new Date(String(iso || "")); if (isNaN(d)) return ""; var h = Math.round((new Date() - d) / 36e5); return h < 1 ? "under an hour ago" : h < 48 ? h + " h ago" : Math.round(h / 24) + " days ago"; }
+  function sev(s) { var k = SEV[s] ? s : "low"; return add(el("span", "ah-sev ah-sev-" + k), icon(k), el("span", "", SEV_WORD[k])); }
+  function link(url, text) { if (typeof url !== "string" || !LINK.test(url)) return null; var a = el("a", "", text || "Read the help page"); a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer"; return a; }
+  function section(title, note) { var c = el("section", "ah-card"); add(c, add(el("div", "ah-row"), el("h3", "ah-h2", title), note ? el("span", "ah-meta", note) : null)); return c; }
+  function seg(options, current, onPick) {
+    var w = el("div", "ah-seg"); w.setAttribute("role", "group");
+    options.forEach(function (o) { var b = el("button", "", o[1]); b.type = "button"; b.setAttribute("aria-pressed", String(o[0] === current)); b.addEventListener("click", function () { onPick(o[0]); }); w.appendChild(b); });
+    return w;
+  }
+  function toggle(btn, panel) { btn.setAttribute("aria-expanded", "false"); panel.hidden = true; btn.addEventListener("click", function () { var open = panel.hidden; panel.hidden = !open; btn.setAttribute("aria-expanded", String(open)); }); }
+
+  function cleanAccount(a) {
+    a = a && typeof a === "object" ? a : {};
+    var cur = str(a.currency, 8) || "(no currency)";
+    var findings = (Array.isArray(a.findings) ? a.findings : []).slice(0, 100).map(function (f, i) {
+      f = f && typeof f === "object" ? f : {};
+      var m = num(f.moneyAtRisk);
+      return { i: i, ruleId: RULE.test(f.ruleId) ? f.ruleId : "", findingId: /^[0-9a-f-]{36}$/i.test(f.findingId) ? f.findingId : "", rule: str(f.rule, 80), severity: SEV[f.severity] ? f.severity : "low", level: LEVEL[f.level] || "", object: str(f.object, 40), metric: str(f.metric, 60), observed: num(f.observed), threshold: num(f.threshold), money: m, bar: m !== null && m > 0 ? m : 0, period: str(f.period, 80), advice: str(f.advice, 600), link: f.link, evidence: Array.isArray(f.evidence) ? f.evidence.slice(0, 31) : null };
+    });
+    return {
+      name: str(a.name, 40) || "Unnamed account", platform: a.platform === "google" ? "Google Ads" : a.platform === "meta" ? "Meta" : "", currency: cur,
+      lastSyncAt: a.lastSyncAt, stale: a.freshness === "stale", partial: a.partial === true, runAt: a.runAt, ruleVersion: str(a.ruleVersion, 16),
+      rules: (Array.isArray(a.rules) ? a.rules : []).slice(0, 30).map(function (r) { r = r || {}; return { id: RULE.test(r.id) ? r.id : "", name: str(r.name, 60), status: STATUS[r.status] ? r.status : "unknown", failed: num(r.failed) || 0, reasons: (Array.isArray(r.reasons) ? r.reasons : []).slice(0, 20).map(function (x) { return str(x, 160); }) }; }),
+      findings: findings,
+      checks: (Array.isArray(a.checks) ? a.checks : []).slice(0, 12).map(function (c) { c = c || {}; return { title: str(c.title, 100), text: str(c.text, 600), link: c.link }; }),
+      learning: a.learning && Array.isArray(a.learning.rows) ? { truncated: a.learning.truncated === true, rows: a.learning.rows.slice(0, 10).map(function (r) { r = r || {}; return { name: str(r.name, 40), conversions: num(r.conversions), spend: num(r.spend) }; }) } : null,
+      changes: (Array.isArray(a.changes) ? a.changes : []).slice(0, 3).map(function (c) { c = c || {}; return { text: str(c.text, 300), ruleId: RULE.test(c.ruleId) ? c.ruleId : "" }; })
+    };
+  }
+
+  function render(root, data) {
+    var app = root.querySelector(".ah-app");
+    var current = str(data.currentRuleVersion, 16);
+    var accounts = (Array.isArray(data.accounts) ? data.accounts : []).slice(0, 20).map(cleanAccount);
+    var head = add(el("header", "", null), el("div", "ah-eyebrow", "ad-hawk \u00b7 audit \u00b7 read-only"), el("h2", "ah-h1", "Where your ad money is at risk"));
+    app.appendChild(head);
+    if (!accounts.length) { app.appendChild(el("div", "ah-notice ah-notice-info", "No account data to show.")); return; }
+    var tabs = el("div", "ah-tabs"), panel = el("div", "", null);
+    tabs.setAttribute("role", "tablist");
+    if (accounts.length > 1) app.appendChild(tabs);
+    app.appendChild(panel);
+    var buttons = accounts.map(function (a, i) {
+      var b = el("button", "ah-tab", a.name + (a.platform ? " \u00b7 " + a.platform : "")); b.type = "button"; b.setAttribute("role", "tab");
+      b.addEventListener("click", function () { show(i); }); tabs.appendChild(b); return b;
+    });
+    function show(i) { buttons.forEach(function (b, j) { b.setAttribute("aria-selected", String(i === j)); }); panel.textContent = ""; panel.appendChild(accountView(accounts[i], current)); }
+    show(0);
+    add(app, el("p", "ah-foot", "Read-only: nothing here changes an ad account. Make changes in Meta Ads Manager or Google Ads. Numbers come from the last sync on this computer; money at risk is ad-hawk's estimate in the account currency, never added across accounts."));
+  }
+
+  function accountView(a, current) {
+    var v = el("div", "", null); v.style.display = "flex"; v.style.flexDirection = "column"; v.style.gap = "16px";
+    var title = add(el("div", "", null), el("h3", "ah-h2", a.name), el("p", "ah-meta", [a.platform, a.currency, "audit run " + when(a.runAt), a.ruleVersion ? "rules " + a.ruleVersion : ""].filter(Boolean).join(" \u00b7 ")));
+    var flags = el("div", "ah-row");
+    if (a.partial) flags.appendChild(el("span", "ah-chip", "Partial: more findings than shown"));
+    add(v, title, flags);
+    if (!a.runAt) v.appendChild(el("div", "ah-notice", "No audit run yet for this account. Ask to sync now; the audit runs after each sync."));
+    else if (a.stale) v.appendChild(el("div", "ah-notice", "This data is over 12 hours old or was never synced. Ask to sync now for fresh numbers."));
+    if (current && a.ruleVersion && a.ruleVersion !== current) v.appendChild(el("div", "ah-notice", "This run used rules " + a.ruleVersion + "; the current rules are " + current + ". The next sync re-runs the audit."));
+
+    var count = { pass: 0, fail: 0, unknown: 0, not_applicable: 0 };
+    a.rules.forEach(function (r) { count[r.status]++; });
+    var priced = a.findings.filter(function (f) { return f.bar > 0; });
+    var sum = priced.reduce(function (s, f) { return s + f.bar; }, 0);
+    var tiles = el("div", "ah-tiles");
+    [[a.partial ? "Money at risk (partial sum of estimates)" : "Money at risk (sum of estimates)", priced.length ? money(sum, a.currency) : "no estimate"], ["Failed rules", count.fail], ["Unknown rules", count.unknown], ["Last sync", ago(a.lastSyncAt) || "never", ago(a.lastSyncAt) ? when(a.lastSyncAt) : ""]].forEach(function (t) {
+      add(tiles, add(el("div", "ah-tile"), el("span", "ah-tile-label", t[0]), el("span", "ah-kpi", t[1]), t[2] ? el("span", "ah-meta", t[2]) : null));
+    });
+    v.appendChild(tiles);
+
+    var rows = {};
+    if (priced.length) {
+      var chart = section("Money at risk", "biggest first, " + a.currency);
+      var bars = el("div", "ah-bars"), max = priced[0].bar, open = false;
+      priced.sort(function (x, y) { return y.bar - x.bar; }); max = priced[0].bar;
+      var more = priced.length > 10 ? el("button", "ah-link-btn", "") : null;
+      function drawBars() {
+        bars.textContent = "";
+        (open ? priced : priced.slice(0, 10)).forEach(function (f) {
+          var b = el("button", "ah-bar", null); b.type = "button";
+          var fill = el("div", "ah-bar-fill"); fill.style.width = Math.max(2, Math.round((f.bar / max) * 100)) + "%";
+          add(b, el("span", "ah-bar-label", (f.ruleId ? f.ruleId + " \u00b7 " : "") + (f.object || f.rule)), add(el("span", "ah-bar-track"), fill), el("span", "ah-money", money(f.money, a.currency)));
+          b.title = "Show this finding"; b.addEventListener("click", function () { if (rows[f.i]) rows[f.i](); });
+          bars.appendChild(b);
+        });
+        if (more) more.textContent = open ? "Show top 10 only" : "And " + (priced.length - 10) + " more: show all";
+      }
+      if (more) { more.type = "button"; more.addEventListener("click", function () { open = !open; drawBars(); }); }
+      drawBars(); add(chart, bars, more); v.appendChild(chart);
+    }
+
+    var list = section("Failed findings", a.findings.length + (a.partial ? " shown (partial)" : " in this run"));
+    var state = { sev: "all", money: "all", sort: "money" };
+    var controls = el("div", "ah-row"), ul = el("ul", "ah-list");
+    function drawControls() {
+      controls.textContent = "";
+      add(controls,
+        seg([["all", "All"], ["high", "High"], ["medium", "Medium"], ["low", "Low"]], state.sev, function (k) { state.sev = k; redraw(); }),
+        seg([["all", "Any estimate"], ["yes", "With money"], ["no", "No estimate"]], state.money, function (k) { state.money = k; redraw(); }),
+        seg([["money", "Sort: money"], ["severity", "Sort: severity"]], state.sort, function (k) { state.sort = k; redraw(); }));
+    }
+    function redraw() {
+      drawControls(); ul.textContent = ""; rows = {};
+      var shown = a.findings.filter(function (f) { return (state.sev === "all" || f.severity === state.sev) && (state.money === "all" || (state.money === "yes") === (f.money !== null)); });
+      shown.sort(state.sort === "money" ? function (x, y) { return (y.money === null ? -Infinity : y.money) - (x.money === null ? -Infinity : x.money) || SEV[y.severity] - SEV[x.severity]; } : function (x, y) { return SEV[y.severity] - SEV[x.severity] || (y.money || 0) - (x.money || 0); });
+      if (!shown.length) ul.appendChild(el("li", "ah-meta", a.findings.length ? "No finding matches these filters." : "No failed findings in this run."));
+      shown.forEach(function (f) { ul.appendChild(findingItem(f, a, rows)); });
+    }
+    redraw(); add(list, controls, ul); v.appendChild(list);
+
+    if (a.rules.length) {
+      var rs = section("Rule results", count.pass + " pass \u00b7 " + count.fail + " fail \u00b7 " + count.unknown + " unknown \u00b7 " + count.not_applicable + " not applicable");
+      var stack = el("div", "ah-stack"), legend = el("div", "ah-legend"), total = a.rules.length;
+      ["pass", "fail", "unknown", "not_applicable"].forEach(function (k) {
+        if (!count[k]) return; var s = el("div", ""); s.style.width = (count[k] / total * 100) + "%"; s.style.background = STATUS_COLOR[k]; stack.appendChild(s);
+        var sw = el("span", "ah-sw"); sw.style.background = STATUS_COLOR[k]; add(legend, add(el("span", ""), sw, document.createTextNode(STATUS[k] + " " + count[k])));
+      });
+      var grid = el("ul", "ah-rules");
+      a.rules.forEach(function (r) {
+        var li = el("li", ""), b = el("button", "ah-rule ah-rule-" + (r.status === "not_applicable" ? "na" : r.status), null); b.type = "button";
+        add(b, el("span", "ah-meta", r.id), el("span", "", r.name || r.id), el("span", "ah-rule-state", STATUS[r.status] + (r.failed ? " \u00b7 " + r.failed + " failed" : "")), r.reasons.length ? el("span", "ah-meta", "Why? " + r.reasons.length + " note" + (r.reasons.length > 1 ? "s" : "")) : null);
+        li.appendChild(b); grid.appendChild(li);
+        if (r.reasons.length) {
+          var box = el("li", "ah-reasons"); box.appendChild(el("strong", "", (r.id ? r.id + " " : "") + STATUS[r.status]));
+          r.reasons.forEach(function (x) { box.appendChild(el("span", "", x)); });
+          grid.appendChild(box); toggle(b, box);
+        }
+      });
+      add(rs, stack, legend, grid); v.appendChild(rs);
+    }
+
+    if (a.learning || a.checks.length) {
+      var bp = section("Best-practice checks", "not rule results; never counted above");
+      if (a.learning) {
+        bp.appendChild(el("p", "", "Meta learning volume: Meta says an ad set needs about 50 optimisation events a week to leave learning. These ad sets had 1 to 49 conversions in the last 7 days. This is a proxy: confirm \"Learning limited\" in the Delivery column. Ad sets with traffic, awareness or engagement goals are not expected to reach 50 and can be ignored." + (a.learning.truncated ? " Only the top ad sets by spend were checked." : "")));
+        if (a.learning.rows.length) {
+          var t = el("table", "ah-table"), hr = el("tr", "");
+          ["Ad set", "Conversions (7 days)", "Spend"].forEach(function (h) { hr.appendChild(el("th", "", h)); });
+          add(t, add(el("thead", ""), hr));
+          var tb = el("tbody", ""); a.learning.rows.forEach(function (r) { add(tb, add(el("tr", ""), el("td", "", r.name), el("td", "", fmt(r.conversions)), el("td", "", money(r.spend, a.currency)))); });
+          t.appendChild(tb); add(bp, add(el("div", "ah-scroll"), t));
+        } else bp.appendChild(el("p", "ah-meta", "No ad set is in that range."));
+        add(bp, link("https://en-gb.facebook.com/business/help/269269737396981", "Meta: about the learning phase"));
+      }
+      a.checks.forEach(function (c) { add(bp, add(el("div", ""), el("strong", "", c.title), el("p", "", c.text), link(c.link))); });
+      v.appendChild(bp);
+    }
+
+    if (a.changes.length) {
+      var ch = section("Changes most worth making", "you make them in Ads Manager or Google Ads"), ol = el("ol", "ah-ol");
+      a.changes.forEach(function (c) { ol.appendChild(el("li", "", (c.ruleId ? c.ruleId + ": " : "") + c.text)); });
+      add(ch, ol); v.appendChild(ch);
+    }
+    return v;
+  }
+
+  function findingItem(f, a, rows) {
+    var li = el("li", "ah-item"), head = el("button", "ah-item-head", null); head.type = "button";
+    var body = add(el("span", "ah-item-body"), el("span", "ah-item-title", (f.ruleId ? f.ruleId + " \u00b7 " : "") + (f.rule || "Rule")), el("span", "ah-meta", [f.object || "(no name)", f.level].filter(Boolean).join(" \u00b7 ")));
+    add(head, sev(f.severity), body, el("span", "ah-money", money(f.money, a.currency)));
+    var d = el("div", "ah-detail");
+    var facts = el("div", "ah-facts");
+    [["Metric", f.metric || "\u2013"], ["Observed", fmt(f.observed)], ["Threshold", fmt(f.threshold)], ["Period", f.period || "\u2013"]].forEach(function (x) { add(facts, add(el("div", "ah-fact"), el("span", "", x[0]), el("b", "", x[1]))); });
+    d.appendChild(facts);
+    if (f.advice) d.appendChild(el("p", "", f.advice));
+    add(d, link(f.link));
+    if (f.evidence && f.evidence.length) {
+      var t = el("table", "ah-table"), hr = el("tr", "");
+      ["Date", "Spend", "Impressions", "Clicks", "Conversions"].forEach(function (h) { hr.appendChild(el("th", "", h)); });
+      add(t, add(el("thead", ""), hr)); var tb = el("tbody", "");
+      f.evidence.forEach(function (r) { r = r || {}; add(tb, add(el("tr", ""), el("td", "", str(r.date, 10)), el("td", "", fmt(r.spend)), el("td", "", fmt(r.impressions)), el("td", "", fmt(r.clicks)), el("td", "", fmt(r.conversions)))); });
+      t.appendChild(tb); add(d, el("strong", "", "Evidence (daily rows)"), add(el("div", "ah-scroll"), t));
+    } else d.appendChild(el("p", "ah-meta", f.evidence ? "This rule stores no daily evidence rows." : "Evidence not loaded here. Ask for this finding's details."));
+    if (typeof window.sendPrompt === "function" && f.ruleId) {
+      var ask = el("button", "ah-link-btn", "Ask Claude to explain this finding"); ask.type = "button";
+      ask.addEventListener("click", function () { window.sendPrompt("Explain the ad-hawk " + f.ruleId + " finding" + (f.findingId ? " " + f.findingId : "") + " in more detail, with its evidence and what to check."); });
+      d.appendChild(ask);
+    }
+    li.appendChild(head); li.appendChild(d); toggle(head, d);
+    rows[f.i] = function () { if (d.hidden) head.click(); head.scrollIntoView({ behavior: "smooth", block: "center" }); head.focus(); };
+    return li;
+  }
+
+  var roots = document.querySelectorAll(".ah-root");
+  for (var r = 0; r < roots.length; r++) {
+    var root = roots[r], src = root.querySelector("script.ah-data");
+    if (!src || root.getAttribute("data-ah-done")) continue;
+    root.setAttribute("data-ah-done", "1");
+    try { render(root, JSON.parse(src.textContent)); }
+    catch (e) { root.querySelector(".ah-app").appendChild(el("div", "ah-notice", "The audit data could not be read, so the view is empty. The text summary below has the results.")); }
+  }
+})();
+</script>
+</div>

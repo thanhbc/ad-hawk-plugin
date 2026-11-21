@@ -2,7 +2,7 @@
 name: audit
 description: Audit your ad accounts: what is wasting money, ranked by money at risk, with the failing rules and evidence
 argument-hint: "[account name | meta | google]"
-allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_audit_status, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__get_rule_catalog, mcp__plugin_ad-hawk-local_ad-hawk-local__get_performance, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now
+allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_audit_status, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__get_rule_catalog, mcp__plugin_ad-hawk-local_ad-hawk-local__get_performance, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now, Read
 ---
 
 Audit the user's ad accounts, and lead with money at risk. Get data only from the ad-hawk MCP tools; a chart or visual
@@ -18,7 +18,8 @@ asked for (nothing means every connected account; `meta` or `google` means that 
 3. Call `list_findings` once per account in scope, with its `accountId` and `orderBy: "money_at_risk"`
    (the tool has no platform filter, so a call without `accountId` would mix in the other platform).
    Call `get_rule_catalog` once for rule names and thresholds.
-   Call `get_finding` only for the few findings you need to explain in detail.
+   Call `get_finding` for the top 5 failed findings per account (by `moneyAtRisk`, then by severity) for their rule
+   name, evidence rows and context; do not call it for the rest.
    For each Meta account, call `get_performance` once with its `accountId`, `level: "ad_set"`, `preset: "7d"` and
    `limit: 100` for the
    learning-volume check in "Best practices" below.
@@ -35,10 +36,33 @@ asked for (nothing means every connected account; `meta` or `google` means that 
      check, for example "Check X in Ads Manager".
 5. How to show it: step 4 is the content; this step is the layout. Lead with visuals, because marketers read numbers
    and charts first.
-   - With a chart or visual tool in this app (for example an inline widget, chart or Artifact tool), draw per account:
-     number tiles (money at risk, failed, unknown, last sync), a horizontal bar chart of the failed findings with a
-     `moneyAtRisk` (biggest first, top 10, then "and N more"), and one bar of pass, fail, unknown and not applicable.
-     Then give step 4 as a short text summary below the charts.
+   - With an inline widget tool that renders HTML in the chat (for example `show_widget`), use the interactive audit
+     view: Read `audit-view.html` from this skill's base directory and pass it to the widget tool unchanged, except
+     that `AUDIT_DATA_JSON` is replaced by one JSON object. Do not restyle it, add markup or write your own script.
+     Do not publish it as an Artifact or web page: the data stays on this computer. The JSON shape is
+     `{"currentRuleVersion", "accounts": [{"name", "platform", "currency", "lastSyncAt", "freshness", "partial",
+     "runAt", "ruleVersion", "rules": [{"id", "name", "status", "failed", "reasons"}], "findings": [{"findingId",
+     "ruleId", "rule", "severity", "level", "object", "metric", "observed", "threshold", "moneyAtRisk", "period",
+     "advice", "link", "evidence"}], "checks": [{"title", "text", "link"}], "learning": {"rows": [{"name",
+     "conversions", "spend"}], "truncated"}, "changes": [{"text", "ruleId"}]}]}`, filled only from the tool results:
+     - Account fields come from `list_accounts` and its `get_audit_status` run; `partial` is `truncated` from
+       `list_findings`. `rules` lists every rule result, with `name` from `get_rule_catalog` and `reasons` the
+       `unknown` and `notApplicable` strings. `findings` are the failed findings from `list_findings` in tool order;
+       `rule` is the catalog name; `object` is `objectName`; `observed` is `observedValue`. `evidence` is the
+       `get_finding` evidence rows (date, spend, impressions, clicks, conversions) for the findings you loaded, and
+       `null` for the others.
+     - `advice` is your one or two sentences from "Best practices" for that finding (no names in it), and `link` is
+       its help-page URL from that section. `checks` are the "check in Ads Manager / Google Ads" items that apply,
+       `learning` is the learning-volume check (omit it for Google accounts), and `changes` are the three changes
+       from step 4. Omit a field you have no data for; never fill one with a guess.
+     - Cut names to 40 characters. Write numbers as JSON numbers, not strings. Serialise with a JSON encoder, then
+       replace every `<` with `\u003c` and every U+2028 and U+2029 with `\u2028` and `\u2029`, so no value can end
+       the script tag.
+     Below the widget, give step 4 as a short text summary.
+   - With another chart or visual tool, or if `audit-view.html` cannot be read, draw per account: number tiles (money
+     at risk, failed, unknown, last sync), a horizontal bar chart of the failed findings with a `moneyAtRisk` (biggest
+     first, top 10, then "and N more"), and one bar of pass, fail, unknown and not applicable. Then give step 4 as a
+     short text summary below the charts.
    - With no such tool, or if it is denied or fails: the money-at-risk part of step 4 becomes a Markdown table per account
      (rule, object, money at risk, observed value, threshold) with a text bar next to each amount, for example
      `████████░░ 1,240 USD`. Scale bars to the biggest amount in that account only. Do not repeat that list as prose.
