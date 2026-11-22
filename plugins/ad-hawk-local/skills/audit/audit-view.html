@@ -20,9 +20,9 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-tab[aria-selected="true"]{border-bottom-color:var(--accent)!important;color:var(--accent)!important;font-weight:600}
 .ah-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
 .ah-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.ah-tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.ah-tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
 .ah-tile-label{font-size:13px;color:var(--muted)}
-.ah-kpi{font:600 24px/1.2 "Space Grotesk",Inter,system-ui,sans-serif}
+.ah-kpi{font:600 24px/1.2 "Space Grotesk",Inter,system-ui,sans-serif;overflow-wrap:anywhere}
 .ah-chip,.ah-sev{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-weight:600}
 .ah-chip{padding:3px 10px;border-radius:999px;background:var(--chip);color:var(--chip-text);font-size:12px}
 .ah-sev{padding:2px 8px;border-radius:6px;border:1px solid var(--border);font-size:12px;background:var(--chip);color:var(--chip-text)}
@@ -55,8 +55,8 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
 .ah-chart{width:100%;height:auto;display:block;margin:8px 0}.ah-chart rect{fill:var(--chart)}.ah-chart line{stroke:var(--chart-axis);stroke-width:1}.ah-chart text{fill:var(--chart-axis);font-size:11px}
 .ah-detail{padding:4px 4px 16px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--soft)}
 .ah-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
-.ah-fact{background:var(--sunken);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;font-size:13px}
-.ah-fact b{font-size:15px;color:var(--text)}
+.ah-fact{background:var(--sunken);border-radius:8px;padding:8px 10px;display:flex;flex-direction:column;font-size:13px;min-width:0}
+.ah-fact b{font-size:15px;color:var(--text);overflow-wrap:anywhere}
 .ah-scroll{overflow-x:auto}
 .ah-table{width:100%;border-collapse:collapse;font-size:13px}
 .ah-table th,.ah-table td{padding:6px 10px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
@@ -294,7 +294,7 @@ color-scheme:light;background:var(--bg);color:var(--text);font:15px/1.5 Inter,sy
     add(head, sev(f.severity), body, el("span", "ah-money", money(f.money, a.currency)));
     var d = el("div", "ah-detail");
     var facts = el("div", "ah-facts");
-    [["Metric", f.metric || "\u2013"], ["Observed", fmt(f.observed)], ["Threshold", fmt(f.threshold)], ["Period", f.period || "\u2013"]].forEach(function (x) { add(facts, add(el("div", "ah-fact"), el("span", "", x[0]), el("b", "", x[1]))); });
+    [["Metric", f.metric ? f.metric.replace(/_/g, "_\u200b") : "\u2013"], ["Observed", fmt(f.observed)], ["Threshold", fmt(f.threshold)], ["Period", f.period || "\u2013"]].forEach(function (x) { add(facts, add(el("div", "ah-fact"), el("span", "", x[0]), el("b", "", x[1]))); });
     d.appendChild(facts);
     if (f.advice) d.appendChild(el("p", "", f.advice));
     add(d, link(f.link));
