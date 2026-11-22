@@ -6,7 +6,10 @@
         "${CLAUDE_PLUGIN_ROOT}/launch.mjs",
         "--client",
         "claude"
-      ]
+      ],
+      "env": {
+        "AD_HAWK_ENABLE_WRITES": "${AD_HAWK_ENABLE_WRITES:-0}"
+      }
     }
   }
 }

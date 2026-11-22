@@ -5,7 +5,8 @@ Claude Code and Codex plugins for ad-hawk, the read-only ad audit assistant.
 - **ad-hawk-local**: audit your Meta and Google Ads from Claude Code or Codex.
   It finds wasted spend, broken tracking and budget problems, ranked by money
   at risk, with the evidence. Data stays on this computer and logins are kept
-  in the system keychain. Read-only on the ad platforms.
+  in the system keychain. Read-only on the ad platforms unless you turn on
+  status changes (pause and enable) with AD_HAWK_ENABLE_WRITES=1.
   macOS on Apple silicon only for now; needs Node.js 20 or later.
   Use: /ad-hawk-local:audit, /ad-hawk-local:fix-first, /ad-hawk-local:inbox,
   /ad-hawk-local:weekly.
@@ -18,7 +19,7 @@ Claude Code and Codex plugins for ad-hawk, the read-only ad audit assistant.
 /plugin install ad-hawk-local@ad-hawk
 ```
 
-The first start downloads the local server (ad-hawk-local-0.1.10-darwin-arm64.tar.gz) from
+The first start downloads the local server (ad-hawk-local-0.2.0-darwin-arm64.tar.gz) from
 this repo's releases, checks it against the sha256 in
 plugins/ad-hawk-local/runtime.json, and keeps it in ~/.ad-hawk/runtime/.
 
