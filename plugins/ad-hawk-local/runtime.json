@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
-  "url": "https://github.com/thanhbc/ad-hawk-plugin/releases/download/v0.3.0/ad-hawk-local-0.3.0-darwin-arm64.tar.gz",
-  "sha256": "129058b515bda15952d93a5f5be2e89dd3d366e7b89171f8869dc52e08481fc5"
+  "version": "0.3.1",
+  "url": "https://github.com/thanhbc/ad-hawk-plugin/releases/download/v0.3.1/ad-hawk-local-0.3.1-darwin-arm64.tar.gz",
+  "sha256": "a89b7df21a00c0be0bff10bd736f209d126f5b1bf45a8a4cd7fbea68cdcc7eb6"
 }
