@@ -9,13 +9,15 @@ Write a weekly review of the ad accounts from ad-hawk, using only the ad-hawk MC
 user named (nothing means every connected account).
 
 1. Call `list_accounts`. For an account name, an exact case-insensitive match on a full name uses that account; otherwise match it as a case-insensitive substring of the names: exactly one match means use that account; several matches mean list them with platform and id and ask which one, never pick one yourself; no match means say so and list the account names, then stop. Note each account's currency and last sync time.
-2. For each account, call `get_performance` with `preset: "7d"` at `level: "account"` for the totals, then at
-   `level: "campaign"` for the campaigns. To compare with the week before, call it again with `startDate` and
-   `endDate` set to the 7 days before the first day of that range. If the current week has no rows, stop for that
-   account with "no activity in range" and the last date with data (from the `get_performance` message or the last sync
-   in `list_accounts`); do not build an empty report. If the prior week starts before the first synced day, say so, for
-   example "prior week has data only from <date>; the change is not comparable", and do not report a change as a
-   percentage.
+2. For each account, call `get_performance` with `preset: "7d"` at `level: "account"` for the totals, then at `level:
+   "campaign"` for the campaigns. To compare with the week before, call it again with `startDate` and `endDate` set to
+   the 7 days before the first day of that range. If the current week has no rows, stop for that account with "no
+   activity in range" and the last date with data (from the `get_performance` message or the last sync in
+   `list_accounts`); do not build an empty report. If the prior week has no rows, say there was no activity in it and
+   give no percentage change. If the prior-week answer has `partialRange: true`, ad-hawk has no rows before
+   `storedDays.first` (the ad platforms leave out days with no activity, so the account may not have run yet, or those
+   days were not synced): say so, for example "prior week has data only from <storedDays.first>; the change is not
+   comparable", and give no percentage change.
 3. Call `get_audit_status` and `list_approval_cards` for the open audit failures and pending cards, with `accountId`
    when the review is for one account.
 4. Report per account: spend, clicks, conversions, CTR, CPC, CPA and ROAS for the week, the change from the week

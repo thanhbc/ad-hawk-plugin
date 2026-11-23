@@ -23,7 +23,7 @@ Claude Code and Codex plugins for ad-hawk, the read-only ad audit assistant.
 /plugin install ad-hawk-local@ad-hawk
 ```
 
-The first start downloads the local server (ad-hawk-local-0.3.1-darwin-arm64.tar.gz) from
+The first start downloads the local server (ad-hawk-local-0.3.2-darwin-arm64.tar.gz) from
 this repo's releases, checks it against the sha256 in
 plugins/ad-hawk-local/runtime.json, and keeps it in ~/.ad-hawk/runtime/.
 

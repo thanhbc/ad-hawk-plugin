@@ -8,9 +8,12 @@ allowed-tools: mcp__plugin_ad-hawk_ad-hawk__list_accounts, mcp__plugin_ad-hawk_a
 Show what is waiting for a decision in the ad-hawk Inbox, using only the ad-hawk MCP tools. The filter is what the
 user asked for (nothing means all pending cards; `high`, `medium` or `low` is a severity; anything else is an account name).
 
-1. For an account name, call `list_accounts` and match it case-insensitively. If it matches nothing, list the
-   account names and stop. If it matches more than one account (names are not unique across platforms), list the matches with their
-   platform and id and ask which one; never pick one yourself.
+1. For any filter, call `list_accounts` first. Match the filter against the account names, in this order: (a) a quoted
+   filter is always an account name; (b) an exact case-insensitive match on a full name uses that account; (c)
+   otherwise an unquoted `high`, `medium` or `low` keeps its meaning as the severity; (d) otherwise match it as a
+   case-insensitive substring of the names: exactly one match means use that account; several matches (names are not
+   unique across platforms) mean list them with platform and id and ask which one, never pick one yourself; no match
+   means say so and list the account names, then stop.
 2. Call `list_approval_cards` (pending by default) with `severity` or `accountId` as the filter asks.
 3. Group the cards by severity, high first. For each card give the account, the proposed change, the expected impact,
    the confidence and the finding behind it. Call `get_finding` only when a card's evidence needs explaining.

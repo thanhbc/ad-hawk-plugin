@@ -1,7 +1,7 @@
 {
   "name": "ad-hawk-local",
   "description": "Audit your Meta and Google Ads from Claude Code: find wasted spend, broken tracking and budget problems, ranked by money at risk, with the evidence. Data stays on this computer; read-only on the ad platforms unless you turn on optional pause/resume changes.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": {
     "name": "thanhbc"
   },
