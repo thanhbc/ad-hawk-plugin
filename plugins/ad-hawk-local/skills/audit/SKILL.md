@@ -127,5 +127,5 @@ Rules:
 - No accounts connected: offer `connect_account` (provider `meta` or `google`) and stop until the user says yes.
 - If an answer is flagged freshness `stale`, say so and offer `sync_now`.
 - If a tool says another session is busy with the cache, wait a minute and retry.
-- This skill is read-only. Local users have no approval screen, so approval cards are suggestions only. The user
-  makes every change in Meta Ads Manager or Google Ads; never claim you can apply anything.
+- This skill is read-only. Approval cards are suggestions; `/ad-hawk-local:inbox` records the user's decision on one
+  as intent only. The user makes every change in Meta Ads Manager or Google Ads; never claim you can apply anything.
