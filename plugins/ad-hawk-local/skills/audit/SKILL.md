@@ -13,6 +13,10 @@ asked for (nothing means every connected account). An argument is an account nam
    Match the argument against the account names from `list_accounts`, in this order: (a) a quoted argument is always an account name; (b) an exact case-insensitive match on a full name uses that account; (c) otherwise an unquoted `meta` or `google` keeps its meaning as the platform (filter the accounts to it); (d) otherwise match it as a case-insensitive substring of the names: exactly one match means use that account; several matches mean list them with platform and id and ask which one, never pick one yourself; no match means say so and list the account names, then stop.
 2. Call `get_audit_status` for the scope (`accountId` for one account, `platform` for a platform). Note `currentRuleVersion`
    and any run whose `ruleVersion` differs from it. If the data is stale, offer `sync_now`.
+   For each run on older rules, say so in the answer: name the run's rule version and the current one, say that
+   its findings, skip notes and reasons come from the older rules and may be out of date (for example a setting
+   name that has since changed), and that the next `sync_now` reruns the audit with the current rules. Offer
+   `sync_now`; do not run it unasked.
 3. Call `list_findings` once per account in scope, with its `accountId` and `orderBy: "money_at_risk"`
    (the tool has no platform filter, so a call without `accountId` would mix in the other platform).
    Call `get_rule_catalog` once for rule names and thresholds.
@@ -126,6 +130,7 @@ Rules:
 - Money is in the account currency. Never add amounts across currencies.
 - No accounts connected: offer `connect_account` (provider `meta` or `google`) and stop until the user says yes.
 - If an answer is flagged freshness `stale`, say so and offer `sync_now`.
+- If a run's `ruleVersion` differs from `currentRuleVersion`, say so as in step 2 before quoting its skip reasons.
 - If a tool says another session is busy with the cache, wait a minute and retry.
 - This skill is read-only. Approval cards are suggestions; `/ad-hawk-local:inbox` records the user's decision on one
   as intent only. The user makes every change in Meta Ads Manager or Google Ads; never claim you can apply anything.
