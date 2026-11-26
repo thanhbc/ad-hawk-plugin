@@ -2,7 +2,7 @@
 name: findings
 description: AI audit of one ad account, written by this Claude Code session and checked by ad-hawk; falls back to the rules if the reply is not valid
 argument-hint: "[account name]"
-allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_ai_prompt, mcp__plugin_ad-hawk-local_ad-hawk-local__submit_ai_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now
+allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_ai_prompt, mcp__plugin_ad-hawk-local_ad-hawk-local__submit_ai_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now, mcp__plugin_ad-hawk-local_ad-hawk-local__set_audit_thresholds
 ---
 
 Write AI findings for one account yourself, using only the ad-hawk MCP tools. ad-hawk never calls an AI model on
@@ -36,4 +36,7 @@ Rules:
 - This skill writes only the local audit history. It changes nothing in Meta Ads Manager or Google Ads.
 - No accounts connected: offer `connect_account` (provider `meta` or `google`) and stop until the user says yes.
 - Money is in each account's currency; never add amounts across currencies.
+- If a money rule (R1, R7, R10, R13) is skipped for a missing threshold, tell the user and ask them for the number in the
+  account's currency. Call `set_audit_thresholds` only with a number the user gave; never suggest or pick a value. It
+  applies from the next audit, so offer a new review after saving it.
 - If a tool says another session is busy with the cache, wait a minute and retry.

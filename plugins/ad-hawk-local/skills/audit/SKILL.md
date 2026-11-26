@@ -2,7 +2,7 @@
 name: audit
 description: Audit your ad accounts: what is wasting money, ranked by money at risk, with the failing rules and evidence
 argument-hint: "[account name | meta | google]"
-allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_audit_status, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__get_rule_catalog, mcp__plugin_ad-hawk-local_ad-hawk-local__get_performance, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now, Read
+allowed-tools: mcp__plugin_ad-hawk-local_ad-hawk-local__list_accounts, mcp__plugin_ad-hawk-local_ad-hawk-local__get_audit_status, mcp__plugin_ad-hawk-local_ad-hawk-local__list_findings, mcp__plugin_ad-hawk-local_ad-hawk-local__get_finding, mcp__plugin_ad-hawk-local_ad-hawk-local__get_rule_catalog, mcp__plugin_ad-hawk-local_ad-hawk-local__get_performance, mcp__plugin_ad-hawk-local_ad-hawk-local__connect_account, mcp__plugin_ad-hawk-local_ad-hawk-local__sync_now, mcp__plugin_ad-hawk-local_ad-hawk-local__set_audit_thresholds, Read
 ---
 
 Audit the user's ad accounts, and lead with money at risk. Get data only from the ad-hawk MCP tools; a chart or visual
@@ -28,7 +28,7 @@ asked for (nothing means every connected account). An argument is an account nam
    - Then "Best-practice checks" from the section below: the learning-volume check, then the "check in Ads Manager /
      Google Ads" items that a failed rule triggered. Skip this part when nothing applies.
    - Then run time, rule version, and counts of pass, fail, unknown and not applicable. Say why each unknown rule
-     could not be judged. If a skip note or unknown reason says a threshold is missing for the account's currency (R1, R13, R7 and R10 have built-in minimums for USD only), name the settings that control them: `AUDIT_TARGET_CPA` or `AUDIT_R1_MIN_SPEND` (R1), `AUDIT_R7_MIN_SPEND` (R7), `AUDIT_R10_MIN_SPEND` (R10) and `AUDIT_R13_MIN_SPEND` (R13), in the account's currency. Show a value only as a clearly labelled example, for example "example only: AUDIT_R1_MIN_SPEND=50", and never apply it or assume a value. Say how to set them: add them to the "env" block of `~/.claude/settings.json` (Claude Code passes it to the plugin's server), then restart Claude Code, which closes every open session. `connect_account` may also return a `thresholdsNote` about this.
+     could not be judged. If a skip note or unknown reason says a money threshold is missing for an account (R1, R7, R10 and R13 have built-in minimums for USD only), tell the user which rules are skipped, then ask them for each number in that account's currency: a target CPA or an R1 minimum spend (R1), an R7 minimum spend (R7), an R10 minimum spend (R10), an R13 minimum spend or a target CPA (R13). Never suggest, propose or pick a value, and do not show example numbers. Call `set_audit_thresholds` with the `accountId` and only the numbers the user gave. The values apply from the next audit: offer `sync_now` (or a new AI review) to apply them, and do not rerun it unasked. `connect_account` may also return a `thresholdsNote` about this.
    - End with the three changes most worth making in Ads Manager or Google Ads, each tied to a finding. Use a
      best-practice check only when fewer than three failed findings exist, say it is one, and phrase it as what to
      check, for example "Check X in Ads Manager".
